@@ -1,0 +1,2 @@
+On 2020-03-31, IBM traded for 130.15 USD. In one month, IBM can either go up to 143.17 USD or down to 117.14 USD. Suppose that on 2020-03-31, you went long a 138.94 USD call. What was the option premium that you paid or received? How would you hedge your position? 
+\noindent\textbf{Solution.} $\Delta_{c}$ is 0.84, $B_{c}$ is 98.3 USD, and so $C_{0}$ is 11.03 USD. To hedge your position, you should go short shares of IBM and long USD in the risk-free asset.
