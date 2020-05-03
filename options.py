@@ -1,40 +1,43 @@
-class Option(Security):
+import random
+from stocks import Stock
+
+class BinomialOption(Stock):
     """Option class. Currently only setup for stock options."""
 
-    def __init__(self):
-        super().__init__(ticker):
+    def __init__(self,ticker):
+        super().__init__(ticker)
 
-        K  = random.uniform(Sd,Su)
+        K  = random.uniform(self.Sd,self.Su)
 
         # call
-        Dc = (Su-K)/(Su-Sd)
-        Bc = Dc*Sd/(1.+rF)
-        C0 = Dc*S[0]-Bc
+        Dc = (self.Su-K)/(self.Su-self.Sd)
+        Bc = Dc*self.Sd/(1.+self.rF)
+        C0 = Dc*self.S[0]-Bc
 
         # put 
-        Dp = (K-Sd)/(Su-Sd)
-        Bp = Dp*Su/(1.+rF)
-        P0 = Bp-Dp*S[0]
+        Dp = (K-self.Sd)/(self.Su-self.Sd)
+        Bp = Dp*self.Su/(1.+self.rF)
+        P0 = Bp-Dp*self.S[0]
 
         self.attr_dict = {
-            'tick' : ticker,
-            'date' : tick_data.index[-2].isoformat()[:10],
-            'S0' : S[0],
-            'S1' : S[1],
-            'Su' : Su,
-            'Sd' : Sd,
+            'tick' : self.tick,
+            'date' : self.date,
+            'S0' : self.S[0],
+            'S1' : self.S[1],
+            'Su' : self.Su,
+            'Sd' : self.Sd,
             'K'  : K, 
-            'rF' : rF,
+            'rF' : self.rF,
             'Dc' : Dc,
             'Bc' : Bc, 
             'C0' : C0,
             'Dp' : Dp,
             'Bp' : Bp,
             'P0' : P0,
-            'lc' : max(S[0]-K,0), # long call payoff
-            'sc' : min(K-S[0],0), # short call payoff
-            'lp' : max(K-S[0],0), # long put payoff
-            'sp' : min(S[0]-K,0)  # short put payoff
+            'lc' : max(self.S[0]-K,0), # long call payoff
+            'sc' : min(K-self.S[0],0), # short call payoff
+            'lp' : max(K-self.S[0],0), # long put payoff
+            'sp' : min(self.S[0]-K,0)  # short put payoff
         }
 
     # TODO: document
@@ -108,9 +111,9 @@ class Option(Security):
         self.attr_dict['short_long'] = 'short' if buy else 'long'
         self.attr_dict['call_put'] = 'call' if call else 'put'
 
-        setup = '\\noindent On {date}, {tick} traded for {S0} USD. '
-        setup += 'In one month, {tick} can either go up to {Su} USD or down to {Sd} USD. '
-        setup += 'Suppose that on {date}, you went {long_short} a {K} USD {call_put}. '
+        setup = '\\noindent On {date}, {tick} traded for {S0:.4f} USD. '
+        setup += 'In one month, {tick} can either go up to {Su:.4f} USD or down to {Sd:.4f} USD. '
+        setup += 'Suppose that on {date}, you went {long_short} a {K:.4f} USD {call_put}. '
 
         question = 'What was the option premium that you paid or received? '
         question += 'How would you hedge your position?\n\n\\vspace{{9pt}}'
@@ -120,21 +123,21 @@ class Option(Security):
 
         answer = '\n\n\\noindent\\textbf{{Solution.}} '
         sub = '_{{c}}' if call else '_{{p}}'
-        answer += '$\\Delta' + sub + '$ is ' + str(D) + ', '
-        answer += '$B' + sub + '$ is ' + str(B) + ' USD, and so '
+        answer += '$\\Delta' + sub + '$ is ' + format(D,'.4f') + ', '
+        answer += '$B' + sub + '$ is ' + format(B,'.4f') + ' USD, and so '
 
         if call:
-            answer += '$C_{{0}}$ is ' + str(self.attr_dict['C0']) + ' USD. '
+            answer += '$C_{{0}}$ is ' + format(self.attr_dict['C0'],'.4f') + ' USD. '
         else: # if put
-            answer += '$P_{{0}}$ is ' + str(self.attr_dict['P0']) + ' USD. '
+            answer += '$P_{{0}}$ is ' + format(self.attr_dict['P0'],'.4f') + ' USD. '
 
         answer += 'To hedge your position, '
         if call:
-            answer += 'you should go {short_long} ' + str(D) + ' shares of {tick} and '  
-            answer += '{long_short} ' + str(B) + ' USD in the risk-free asset.' 
+            answer += 'you should go {short_long} ' + format(D,'.4f') + ' shares of {tick} and '  
+            answer += '{long_short} ' + format(B,'.4f') + ' USD in the risk-free asset.' 
         else:
-            answer += 'you should go {long_short} ' + str(D) + ' shares of {tick} and '  
-            answer += '{short_long} ' + str(B) + ' USD in the risk-free asset.' 
+            answer += 'you should go {long_short} ' + format(D,'.4f') + ' shares of {tick} and '  
+            answer += '{short_long} ' + format(B,'.4f') + ' USD in the risk-free asset.' 
 
         text = setup + question + answer
         text = text.format(**self.attr_dict)
