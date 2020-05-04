@@ -21,7 +21,7 @@ class BinomialOption(Stock):
 
         self.attr_dict = {
             'tick' : self.tick,
-            'date' : self.date,
+            'date' : self.date[0],
             'S0' : self.S[0],
             'S1' : self.S[1],
             'Su' : self.Su,
@@ -72,19 +72,16 @@ class BinomialOption(Stock):
             else: # short
                 your_payoff = self.attr_dict['sp']
                 
-        lectpath = '/home/jordan/Projects/investments-lectures/L61_OptionsI/'
-
-        setup = '\\noindent On {date}, {tick} traded for {S0} USD. '
-        setup += 'Suppose you were {long_short} a {K} USD {call_put} that expired on {date}. '  
+        setup = 'On {date}, {tick} traded for {S0:.4f} USD. '
+        setup += 'Suppose you were {long_short} a {K:.4f} USD {call_put} that expired on {date}. '  
 
         question = 'Was the option in, at, or out-of-the-money? '
         question += 'Was the option exercised? '
-        question += 'What was your payoff at expiration?\n\n\\vspace{{9pt}} '
+        question += 'What was your payoff at expiration?\n\n'
 
-        answer = '\n\n\\textbf{{Solution.}}'
-        answer += 'The option was ' + ('in-' if long_payoff > 0 else 'out-of-') + 'the-money, ' 
+        answer = 'The option was ' + ('in-' if long_payoff > 0 else 'out-of-') + 'the-money, ' 
         answer += 'so it was ' + ('exericed.' if long_payoff > 0 else 'not exercised. ')
-        answer += 'Your payoff was ' + str(your_payoff) + ' USD.'
+        answer += 'Your payoff was ' + format(your_payoff,'.4f') + ' USD.'
 
         text = setup + question + answer
         text = text.format(**self.attr_dict)
@@ -111,19 +108,19 @@ class BinomialOption(Stock):
         self.attr_dict['short_long'] = 'short' if buy else 'long'
         self.attr_dict['call_put'] = 'call' if call else 'put'
 
-        setup = '\\noindent On {date}, {tick} traded for {S0:.4f} USD. '
+        # TODO: REMOVE HARD-CODED RF RATE!
+        setup = 'The risk-free rate is .10%. On {date}, {tick} traded for {S0:.4f} USD. '
         setup += 'In one month, {tick} can either go up to {Su:.4f} USD or down to {Sd:.4f} USD. '
         setup += 'Suppose that on {date}, you went {long_short} a {K:.4f} USD {call_put}. '
 
         question = 'What was the option premium that you paid or received? '
-        question += 'How would you hedge your position?\n\n\\vspace{{9pt}}'
+        question += 'How would you hedge your position?\n\n'
 
         D = self.attr_dict['Dc'] if call else self.attr_dict['Dp']
         B = self.attr_dict['Bc'] if call else self.attr_dict['Bp']
 
-        answer = '\n\n\\noindent\\textbf{{Solution.}} '
         sub = '_{{c}}' if call else '_{{p}}'
-        answer += '$\\Delta' + sub + '$ is ' + format(D,'.4f') + ', '
+        answer = '$\\Delta' + sub + '$ is ' + format(D,'.4f') + ', '
         answer += '$B' + sub + '$ is ' + format(B,'.4f') + ' USD, and so '
 
         if call:

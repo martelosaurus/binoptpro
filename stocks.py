@@ -1,6 +1,7 @@
-from finfaqs import ff
+import pandas as pd
+from alpha_vantage.timeseries import TimeSeries
 
-class Stock(ff.Security):
+class Stock:
     """
     Stock class
     """
@@ -46,8 +47,8 @@ class Stock(ff.Security):
         question += 'How much do you expect to make?'
         question += 'How much does your portfolio cost?\n\n\\vspace{{9pt}}'
 
-        answer = 'The stock is ' + overunder + ' priced.' 
-        answer += 'In order to exploit this mis-pricing, ' + step1 + step2 + step3. 
+        #answer = 'The stock is ' + overunder + ' priced.' 
+        #answer += 'In order to exploit this mis-pricing, ' + step1 + step2 + step3. 
         answer += 'In one month, you expect to make'
         answer += 'Your portfolio does not cost anything.'
 

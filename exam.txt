@@ -1,0 +1,48 @@
+On 2020-04-30, TSLA traded for 524.0000 USD. Suppose you were long a 560.1008 USD forward that expired on 2020-04-30. What was your payoff?
+
+Your payoff was -36.1008 USD.
+
+On 2020-04-30, TSLA traded for 524.0000 USD. The annual risk-free rate is 0.0010. What is the forward price of a 10-year forward?
+
+The forward price is 529.2636 USD.
+
+On 2020-04-30, TSLA traded for 524.0000 USD. Suppose you were long a 530.1304 USD call that expired on 2020-04-30. Was the option in, at, or out-of-the-money? Was the option exercised? What was your payoff at expiration?
+
+The option was out-of-the-money, so it was not exercised. Your payoff was 0.0000 USD.
+
+The risk-free rate is .10%. On 2020-04-30, TSLA traded for 524.0000 USD. In one month, TSLA can either go up to 576.4000 USD or down to 471.6000 USD. Suppose that on 2020-04-30, you went long a 530.1304 USD call. What was the option premium that you paid or received? How would you hedge your position?
+
+$\Delta_{c}$ is 0.4415, $B_{c}$ is 208.0052 USD, and so $C_{0}$ is 23.3428 USD. To hedge your position, you should go short 0.4415 shares of TSLA and long 208.0052 USD in the risk-free asset.
+
+On 2020-04-30, TSLA traded for 524.0000 USD. Suppose you were long a 530.1304 USD put that expired on 2020-04-30. Was the option in, at, or out-of-the-money? Was the option exercised? What was your payoff at expiration?
+
+The option was in-the-money, so it was exericed.Your payoff was 6.1304 USD.
+
+The risk-free rate is .10%. On 2020-04-30, TSLA traded for 524.0000 USD. In one month, TSLA can either go up to 576.4000 USD or down to 471.6000 USD. Suppose that on 2020-04-30, you went long a 530.1304 USD put. What was the option premium that you paid or received? How would you hedge your position?
+
+$\Delta_{p}$ is 0.5585, $B_{p}$ is 321.5956 USD, and so $P_{0}$ is 28.9436 USD. To hedge your position, you should go long 0.5585 shares of TSLA and short 321.5956 USD in the risk-free asset.
+
+On 2020-04-30, TSLA traded for 524.0000 USD. Suppose you were short a 560.1008 USD forward that expired on 2020-04-30. What was your payoff?
+
+Your payoff was 36.1008 USD.
+
+On 2020-04-30, TSLA traded for 524.0000 USD. The annual risk-free rate is 0.0010. What is the forward price of a 10-year forward?
+
+The forward price is 529.2636 USD.
+
+On 2020-04-30, TSLA traded for 524.0000 USD. Suppose you were short a 530.1304 USD call that expired on 2020-04-30. Was the option in, at, or out-of-the-money? Was the option exercised? What was your payoff at expiration?
+
+The option was out-of-the-money, so it was not exercised. Your payoff was 0.0000 USD.
+
+The risk-free rate is .10%. On 2020-04-30, TSLA traded for 524.0000 USD. In one month, TSLA can either go up to 576.4000 USD or down to 471.6000 USD. Suppose that on 2020-04-30, you went short a 530.1304 USD call. What was the option premium that you paid or received? How would you hedge your position?
+
+$\Delta_{c}$ is 0.4415, $B_{c}$ is 208.0052 USD, and so $C_{0}$ is 23.3428 USD. To hedge your position, you should go long 0.4415 shares of TSLA and short 208.0052 USD in the risk-free asset.
+
+On 2020-04-30, TSLA traded for 524.0000 USD. Suppose you were short a 530.1304 USD put that expired on 2020-04-30. Was the option in, at, or out-of-the-money? Was the option exercised? What was your payoff at expiration?
+
+The option was in-the-money, so it was exericed.Your payoff was -6.1304 USD.
+
+The risk-free rate is .10%. On 2020-04-30, TSLA traded for 524.0000 USD. In one month, TSLA can either go up to 576.4000 USD or down to 471.6000 USD. Suppose that on 2020-04-30, you went short a 530.1304 USD put. What was the option premium that you paid or received? How would you hedge your position?
+
+$\Delta_{p}$ is 0.5585, $B_{p}$ is 321.5956 USD, and so $P_{0}$ is 28.9436 USD. To hedge your position, you should go short 0.5585 shares of TSLA and long 321.5956 USD in the risk-free asset.
+

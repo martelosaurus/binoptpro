@@ -1,35 +1,27 @@
-class Forward(Security):
+import random
+from stocks import Stock
+
+class Forward(Stock):
     """
     Forward class
     """
 
-    def __init__(self):
-        
-        super().__init__(ticker):
+    def __init__(self,ticker,T):
+        super().__init__(ticker)
 
-        K  = random.uniform(Sd,Su)
-
-        # call
-        Dc = (Su-K)/(Su-Sd)
-        Bc = Dc*Sd/(1.+rF)
-        C0 = Dc*S[0]-Bc
-
-        # put 
-        Dp = (K-Sd)/(Su-Sd)
-        Bp = Dp*Su/(1.+rF)
-        P0 = Bp-Dp*S[0]
+        K = self.S[0]*(1.+self.rF)**T
+        K_act = random.uniform(.8*K,1.2*K)
 
         self.attr_dict = {
-            'tick' : ticker,
-            'date' : tick_data.index[-2].isoformat()[:10],
-            'S0' : S[0],
-            'S1' : S[1],
-            'Su' : Su,
-            'Sd' : Sd,
-            'K'  : K, 
-            'rF' : rF,
-            'l' : S[0]-K, # long forward payoff
-            's' : K-S[0]  # short forward payoff
+            'T' : T,
+            'tick' : self.tick,
+            'date' : self.date[0],
+            'S0' : self.S[0],
+            'rF' : self.rF,
+            'K' : K,
+            'K_act' : K_act,
+            'l' : self.S[0]-K_act, # long forward payoff
+            's' : K_act-self.S[0]  # short forward payoff
         }
 
     def payoffs(self,buy=True,answer=True):
@@ -45,24 +37,23 @@ class Forward(Security):
         """
 
         if buy: # long
-            your_payoff = self.attr_dict['lc']
+            your_payoff = self.attr_dict['l']
+            self.attr_dict['long_short'] = 'long'
         else: # short
-            your_payoff = self.attr_dict['sc']
+            your_payoff = self.attr_dict['s']
+            self.attr_dict['long_short'] = 'short'
 
-        setup = '\\noindent On {date}, {tick} traded for {S0} USD. '
-        setup += 'Suppose you were {long_short} a {K} USD {call_put} that expired on {date}. '  
+        setup = 'On {date}, {tick} traded for {S0:.4f} USD. '
+        setup += 'Suppose you were {long_short} a {K_act:.4f} USD forward that expired on {date}. '  
 
-        question = 'Was the option in, at, or out-of-the-money? '
-        question += 'Was the option exercised? '
-        question += 'What was your payoff at expiration?\n\n\\vspace{{9pt}} '
+        question = 'What was your payoff?\n\n' 
 
-        answer = '\n\n\\textbf{{Solution.}}'
-        answer += 'The option was ' + ('in-' if long_payoff > 0 else 'out-of-') + 'the-money, ' 
-        answer += 'so it was ' + ('exericed.' if long_payoff > 0 else 'not exercised. ')
-        answer += 'Your payoff was ' + str(your_payoff) + ' USD.'
+        answer = 'Your payoff was ' + format(your_payoff,'.4f') + ' USD.'
 
         text = setup + question + answer
         text = text.format(**self.attr_dict)
+
+        return text
 
     # TODO: document
     def pricing(self,call=True,buy=True):
@@ -79,6 +70,17 @@ class Forward(Security):
             If True, then reports the answer
 
         """
+
+        setup = 'On {date}, {tick} traded for {S0:.4f} USD. The annual risk-free rate is {rF:.4f}. '
+
+        question = 'What is the forward price of a {T}-year forward?\n\n' 
+
+        answer = 'The forward price is {K:.4f} USD.'
+
+        text = setup + question + answer
+        text = text.format(**self.attr_dict)
+
+        return text
 
     def arbitrage(self):
         """

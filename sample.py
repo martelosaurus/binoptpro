@@ -1,27 +1,16 @@
-f_prac = open('prac.txt','w')
+from options import BinomialOption
+from forwards import Forward
+
 f_exam = open('exam.txt','w')
 
-# APT
-IBM = Stock('IBM')
-AMD = Stock('AMD')
+TSLA_opt = BinomialOption('TSLA')
+TSLA_for = Forward('TSLA',10)
 
-if False:
+for b in [True,False]:
+    f_exam.writelines(TSLA_for.payoffs(buy=b) + '\n\n')
+    f_exam.writelines(TSLA_for.pricing(buy=b) + '\n\n')
+    for c in [True,False]:
+        f_exam.writelines(TSLA_opt.payoffs(call=c,buy=b) + '\n\n')
+        f_exam.writelines(TSLA_opt.pricing(call=c,buy=b) + '\n\n')
 
-    # forwards I
-    IBM = Forward('IBM')
-    AMD = Forward('AMD')
-
-    # forwards II
-    USD_EUR = Currency('USD','EUR')
-    USD_YEN = Currency('USD','YEN')
-
-    # options
-    IBM = Option('IBM')
-    AMD = Option('AMD')
-
-    # option
-    f_prac.writelines(IBM.pricing() + '\n\n')
-    f_prac.writelines(IBM.pricing() + '\n\n')
-
-f_prac.close()
 f_exam.close()
